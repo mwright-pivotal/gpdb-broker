@@ -32,10 +32,18 @@
 			<artifactId>greenplum</artifactId>
 			<version>5.1.8</version>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+=======
+		<!-- add actuator to monitor broker -->
+  		<dependency>
+            		<groupId>org.springframework.boot</groupId>
+            		<artifactId>spring-boot-starter-actuator</artifactId>
+        	</dependency>
+>>>>>>> 5e33ac47d7a3fa4a9acd14f9f387e1ca7317b935
 	</dependencies>
 
 	<dependencyManagement>
