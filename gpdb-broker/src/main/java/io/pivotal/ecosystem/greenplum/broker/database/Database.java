@@ -62,7 +62,7 @@ public class Database {
             logger.error("Current user for instance '" + instanceId + "' could not be found");
         }
 
-        greenplum.executeUpdate("SELECT pg_terminate_backend(pg_stat_activity.procpid) "
+        greenplum.executeSelect("SELECT pg_terminate_backend(pg_stat_activity.procpid) "
                                 + " FROM pg_stat_activity WHERE pg_stat_activity.datname = '"
         		                + instanceId + "' AND procpid <> pg_backend_pid()");
         greenplum.executeUpdate("ALTER DATABASE \"" + instanceId + "\" OWNER TO \"" + currentUser + "\"");
