@@ -6,3 +6,5 @@ applications:
   path: target/greenplum-broker.jar
   env:
     SPRING_PROFILES_ACTIVE: cloud
+    SPRING_DATASOURCE_URL: jdbc:pivotal:greenplum://192.168.0.116:5432;DatabaseName=gpadmin
+    SPRING_CREDHUB_URL: https://credhub.service.cf.internal:8844

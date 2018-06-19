@@ -43,18 +43,20 @@ public class GreenplumDatabase {
     
     private int databasePort;
     private String databaseHost;
+    private Boolean ssl;
 
 
     @Autowired
     public GreenplumDatabase(DataSource dataSource) throws SQLException {
-//    	GreenplumDatabase.conn = dataSource.getConnection();
+//    		GreenplumDatabase.conn = dataSource.getConnection();
 		this.SqlTemplate = new JdbcTemplate(dataSource);
         try {
             String jdbcUrl = dataSource.getConnection().getMetaData().getURL();
             // Remove "jdbc:" prefix from the connection JDBC URL to create an URI out of it.
-//            String cleanJdbcUrl = jdbcUrl.replace("jdbc:pivotal", "");  // Greenplum JDBC
-            String cleanJdbcUrl = jdbcUrl.replace("jdbc:", "");
+            String cleanJdbcUrl = jdbcUrl.replace("jdbc:pivotal:", "");  // Greenplum JDBC
+//            String cleanJdbcUrl = jdbcUrl.replace("jdbc:", "");
             logger.debug("cleanJdbcUrl: " + cleanJdbcUrl);
+            this.ssl = cleanJdbcUrl.contains("SSL");
             int index = cleanJdbcUrl.indexOf(";");
             if (index != -1)
             		cleanJdbcUrl = cleanJdbcUrl.substring(0, index);
@@ -122,7 +124,9 @@ public class GreenplumDatabase {
         }
     }
  */
-
+    public Boolean getSSL() {
+    		return this.ssl;
+    }
     public  String getDatabaseHost() {
     		// can we dig this back out of the template ?
         return this.databaseHost;

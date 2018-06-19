@@ -66,12 +66,12 @@ public class GreenplumServiceInstanceBindingService implements ServiceInstanceBi
 //		Settings when using the Greenplum JDBC driver
 //		String uri = String.format("pivotal:greenplum://%s:%s@%s:%d/%s",
 //                serviceInstanceId, passwd,
-//                gpdb.getDatabaseHost(), gpdb.getDatabasePort(),
+//                greenplum.getDatabaseHost(), greenplum.getDatabasePort(),
 //                serviceInstanceId);
 //		
 //		String jdbcURL = String.format("jdbc:pivotal:greenplum://%s:%d;DatabaseName=%s",
-//                gpdb.getDatabaseHost(),
-//				gpdb.getDatabasePort(),
+//				greenplum.getDatabaseHost(),
+//				greenplum.getDatabasePort(),
 //                serviceInstanceId);
 
 //		Settings when using the Postgres JDBC driver
@@ -79,12 +79,13 @@ public class GreenplumServiceInstanceBindingService implements ServiceInstanceBi
                 serviceInstanceId, passwd,
                 greenplum.getDatabaseHost(), greenplum.getDatabasePort(),
                 serviceInstanceId);
+        String sslMode = (greenplum.getSSL() ? "require" : "disable");
         String jdbcURL = String.format("jdbc:postgresql://%s:%d/%s?user=%s&password=%s&%s",
                 greenplum.getDatabaseHost(), greenplum.getDatabasePort(),
                 serviceInstanceId,  // database
                 serviceInstanceId,  // user
                 passwd,             // user password
-                "sslmode=require");
+                "sslmode="+sslMode);
 		
         Map<String, Object> credentials = new HashMap<String, Object>();
         credentials.put("uri", uri);

@@ -59,8 +59,10 @@ public class GreenplumServiceInstanceService implements ServiceInstanceService {
 		String organizationGuid = createServiceInstanceRequest.getOrganizationGuid();
 		String spaceGuid = createServiceInstanceRequest.getSpaceGuid();
 		try {
+			logger.info("Creating new instance for service instance id " + serviceInstanceId);
 			db.createDatabaseForInstance(serviceInstanceId, serviceId, planId, organizationGuid, spaceGuid);
 			role.createRoleForInstance(serviceInstanceId);
+			logger.info("db create successful");
 		} catch (SQLException e) {
 			logger.error("Error while creating service instance '" + serviceInstanceId + "'", e);
 			throw new ServiceBrokerException(e.getMessage());
